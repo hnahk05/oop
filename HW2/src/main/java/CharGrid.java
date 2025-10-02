@@ -32,7 +32,7 @@ public class CharGrid {
         return minArea;
 	}
 
-    private int armLength(int r, int c, int dr, int dc, char ch) {
+    private int cross(int r, int c, int dr, int dc, char ch) {
         int len = 0;
         int i = r + dr;
         int j = c + dc;
@@ -50,13 +50,11 @@ public class CharGrid {
             for (int j = 0; j < grid[i].length; j++) {
                 char ch = grid[i][j];
                 if (ch == ' ') continue;
-                int up = armLength(i, j, -1, 0, ch);
-                int down = armLength(i, j, 1, 0, ch);
-                int left = armLength(i, j, 0, -1, ch);
-                int right = armLength(i, j, 0, 1, ch);
-
-                if (up >= 1 && down >= 1 && left >= 1 && right >= 1 &&
-                    up == down && up == left && up == right) {
+                int up = cross(i, j, -1, 0, ch);
+                int down = cross(i, j, 1, 0, ch);
+                int left = cross(i, j, 0, -1, ch);
+                int right = cross(i, j, 0, 1, ch);
+                if (up >= 1 && down >= 1 && left >= 1 && right >= 1 && up == down && up == left && up == right) {
                     count++;
                 }
             }
